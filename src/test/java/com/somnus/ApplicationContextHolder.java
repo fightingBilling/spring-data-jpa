@@ -1,4 +1,4 @@
-package com.somnus.jpa;
+package com.somnus;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

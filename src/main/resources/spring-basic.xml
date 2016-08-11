@@ -11,7 +11,7 @@
 	<context:component-scan base-package="com.somnus.jpa" />
 	
     <!-- application 上下文 -->
-    <bean class="com.somnus.jpa.ApplicationContextHolder"/>
+    <bean class="com.somnus.ApplicationContextHolder"/>
     
     <import resource="classpath:/spring-env.xml"/>
     <import resource="classpath:/spring-resource-db.xml"/>

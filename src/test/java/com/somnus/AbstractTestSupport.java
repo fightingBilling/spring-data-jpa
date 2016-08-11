@@ -1,4 +1,4 @@
-package com.somnus.jpa;
+package com.somnus;
 
 import org.junit.After;
 import org.junit.Before;
