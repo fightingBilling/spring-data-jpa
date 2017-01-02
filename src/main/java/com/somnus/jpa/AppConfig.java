@@ -19,7 +19,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 public class AppConfig {
 	@Bean
 	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();
+		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).build();
 	}
 
 	@Bean
@@ -30,7 +30,7 @@ public class AppConfig {
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-		jpaVendorAdapter.setDatabase(Database.H2);
+		jpaVendorAdapter.setDatabase(Database.MYSQL);
 		jpaVendorAdapter.setGenerateDdl(true);
 		return jpaVendorAdapter;
 	}

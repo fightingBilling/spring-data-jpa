@@ -26,17 +26,15 @@
 		<!-- 指定数据源 -->
         <property name="dataSource" ref="proxyDataSource"/>
         <!-- 指定Jpa持久化实现厂商类,这里以Hibernate为例 -->
-        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
-        <!-- 指定Entity实体类包路径 -->
-        <property name="packagesToScan" >
-            <array>
-                <value>com.somnus.jpa.model</value>
-            </array>
+        <property name="jpaVendorAdapter">
+        	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
+        <!-- 指定Entity实体类包路径 -->
+        <property name="packagesToScan" value="com.somnus.jpa.model" />
         <!-- 指定JPA属性；如Hibernate中指定是否显示SQL的是否显示、方言等 -->
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
                 <prop key="hibernate.show_sql">true</prop>
@@ -46,19 +44,12 @@
         </property>
     </bean>
     
-    <!-- Hibernate对Jpa的实现 -->
-    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
-
     <!-- 配置事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="dataSource" ref="proxyDataSource" />
     </bean>
     
 	<!-- 注解方式配置事物 -->
-	<!-- 【基于CGLIB类代理】，只能将@Transactional放置在具体类上或具体类的方法上 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
     
-    <!-- 【基于JDK动态代理】 ，可以将@Transactional放置在接口和具体类上或具体类的方法上
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-     -->
 </beans>

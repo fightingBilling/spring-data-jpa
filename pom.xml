@@ -13,15 +13,43 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- junit -->
-		<junit.version>4.11</junit.version>
+		<junit.version>4.12</junit.version>
 		<!-- hibernate -->
 		<hibernate.version>4.2.21.Final</hibernate.version>
+		<!-- JDBC Driver -->
+		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+		<jdbc.driver.version>5.1.27</jdbc.driver.version>
 		<!-- datasource -->
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<jdbcdslog.version>1.0.6.2</jdbcdslog.version>
+		<!-- log -->
+		<slf4j.version>1.7.2</slf4j.version>
+		<logback.version>1.0.6</logback.version>
 	</properties>
 
 	<dependencies>
+		<!--******** logback and slf4j ******** -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -47,11 +75,12 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		<!-- h2 -->
+		<!-- jdbc driver -->
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.183</version>
+			<groupId>${jdbc.driver.groupId}</groupId>
+			<artifactId>${jdbc.driver.artifactId}</artifactId>
+			<version>${jdbc.driver.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<!-- datasource -->
 		<dependency>
@@ -77,8 +106,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<target>1.7</target>
-					<resource>1.7</resource>
+					<target>1.8</target>
+					<resource>1.8</resource>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
