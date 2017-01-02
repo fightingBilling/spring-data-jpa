@@ -3,10 +3,8 @@ package com.somnus.jpa.repositories;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
 import com.somnus.jpa.model.Person;
@@ -28,10 +26,7 @@ import com.somnus.jpa.model.Person;
  * 若需要使用级联属性, 则属性之间使用 _ 进行连接. 
  */
 //@RepositoryDefinition(domainClass=Person.class,idClass=Integer.class)
-public interface PersonRepsotory extends JpaRepository<Person, Integer>
-										/*, JpaSpecificationExecutor<Person>
-										, PersonDao*/
-{
+public interface PersonRepsotory extends Repository<Person, Integer>{
 
 	/**
 	 * 根据 lastName 来获取对应的 Person
@@ -122,16 +117,5 @@ public interface PersonRepsotory extends JpaRepository<Person, Integer>
 	@Query(value="SELECT count(id) FROM jpa_persons", nativeQuery=true)
 	long getTotalCount();
 	
-	/**
-	 * 可以通过自定义的 JPQL 完成 UPDATE 和 DELETE 操作. 注意: JPQL 不支持使用 INSERT
-	 * 在 @Query 注解中编写 JPQL 语句, 但必须使用 @Modifying 进行修饰. 以通知 SpringData, 这是一个 UPDATE 或 DELETE 操作
-	 * UPDATE 或 DELETE 操作需要使用事务, 此时需要定义 Service 层. 在 Service 层的方法上添加事务操作. 
-	 * 默认情况下, SpringData 的每个方法上有事务, 但都是一个只读事务. 他们不能完成修改操作!
-	 * @param id
-	 * @param email
-	 */
-	@Modifying
-	@Query("UPDATE Person p SET p.email = :email WHERE id = :id")
-	void updatePersonEmail(@Param("id") Integer id, @Param("email") String email);
 }
  
